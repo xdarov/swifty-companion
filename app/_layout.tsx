@@ -6,8 +6,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{ headerShown: false }}
     >
-      <Tabs.Screen name="UserNameInput" />
-      <Tabs.Screen name="UserPage/[username]" />
+      <Tabs.Screen name="UserPage/" />
     </Tabs>
   );
 }
