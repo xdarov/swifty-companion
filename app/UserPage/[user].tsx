@@ -1,10 +1,11 @@
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, Button, StyleSheet } from "react-native";
 import { useLocalSearchParams } from 'expo-router';
 import { get42UserData, get42UsersData } from "../utils/requests";
 import { useEffect, useState } from "react";
-import UserNameInput from "../components/UserNameInput";
+import UserNameInput from "../UserNameInput";
 import UserIcon from "../components/UserIcon";
 import UserProfileCard from "../components/UserProfileCard";
+import { useRouter } from 'expo-router';
 
 
 const ScrollStyle = {
@@ -16,13 +17,14 @@ const ScrollStyle = {
 
 
 const UserPage = () => {
-  const params = useLocalSearchParams();
-  const {username} = params;
+  const { user } = useLocalSearchParams<{ user: string }>();
   const [userData, setUserData] = useState(null);
   const [userIconLink, setUserUconLink] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter()
 
   useEffect(() => {
-    get42UserData(username).then(response => {
+    get42UserData(user).then(response => {
       // get42UsersData().then(response => {
       const [response_status, response_data] = response;
       if (response_status === 200) {
@@ -31,19 +33,35 @@ const UserPage = () => {
       } else {
         setUserData(null);
       }
+      setLoading(false);
     });
-  }, [username]);
+  }, [user]);
+
+  if (loading)
+    return (<Text>"Loading ..."</Text>)
 
   return (
     <ScrollView contentContainerStyle={ScrollStyle}>
-      <UserNameInput />
+      <Button
+        title="Get new User"
+        onPress={() => (router.push("UserNameInput/"))}
+        style={styles.button}
+      />
       {userData !== null && <UserIcon imageUrl={userIconLink} />}
       {userData !== null && <UserProfileCard userData={userData} />}
-      {userData === null && <Text>No User Data</Text>}
+      {userData === null && <Text>User not found</Text>}
       {/* <Text>{JSON.stringify(userData || {}, null, 2)}</Text> */}
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    width: '80%',
+    paddingBottom: 80,
+    marginBottom: 80,
+  },
+});
 
 
 export default UserPage;

@@ -16,7 +16,6 @@ const getOAuthToken = async () => {
     return response.data.access_token;
   } catch (error) {
     console.error('Ошибка при получении токена:', error);
-    throw error;
   }
 }
 
@@ -31,13 +30,12 @@ const get42UsersData = async () => {
     return [response.status, response.data];
   } catch (error) {
     console.error(`Ошибка при запросе v2/cursus/42/users:`, error);
-    throw error;
   }
 }
 
 const get42UserData = async (name: string, retryAttempt = false) => {
   try {
-    const response = await axios.get(`https://api.intra.42.fr/v2/users/${name?.toLowerCase()}`, {
+    const response = await axios.get(`https://api.intra.42.fr/v2/users/${(name || '').toLowerCase()}`, {
       headers: { Authorization: `Bearer ${await AsyncStorage.getItem('accessToken')}` },
       timeout: 5000
     });
@@ -49,11 +47,11 @@ const get42UserData = async (name: string, retryAttempt = false) => {
       
       if (!retryAttempt && status !== 404) {
         await getOAuthToken();
-        console.error("Token Request");
+        console.info("Token Request");
         return get42UserData(name, true);
       }
 
-      console.error(`Ошибка при запросе v2/users/${name.toLowerCase()}:`, error.message);
+      console.error(`Ошибка при запросе v2/users/${(name || '').toLowerCase()}:`, error.message);
       return [status, null];
     }
     console.error('Неожиданная ошибка:', error);
@@ -61,5 +59,5 @@ const get42UserData = async (name: string, retryAttempt = false) => {
   }
 }
 
-
+export default () => {};
 export {getOAuthToken, get42UsersData, get42UserData}

@@ -1,5 +1,5 @@
 import { Button, Text, View, TextInput, ScrollView, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from 'expo-router';
 
 
@@ -14,12 +14,7 @@ const UserNameInput = () => {
 
   const onPressUserData = () => {
     if (userNameInput)
-      router.navigate({
-        pathname: `/UserPage/${userNameInput}`,
-        params: { 
-          username: userNameInput,
-        }
-      })
+      router.push(`/UserPage/${userNameInput}`);
   }
 
   return (
@@ -29,6 +24,9 @@ const UserNameInput = () => {
           value={userNameInput}
           onChange={onChangeUserNameInput}
           style={styles.input}
+          submitBehavior="blurAndSubmit"
+          onSubmitEditing={onPressUserData}
+          returnKeyType="done"
         />
         <Button
           title="Get user data"
