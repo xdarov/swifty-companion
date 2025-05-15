@@ -1,4 +1,4 @@
-import { Button, View, TextInput, ScrollView, StyleSheet } from "react-native";
+import { Button, Text, View, TextInput, ScrollView, StyleSheet } from "react-native";
 import { useState } from "react";
 import { useRouter } from 'expo-router';
 

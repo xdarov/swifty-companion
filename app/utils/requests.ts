@@ -15,7 +15,7 @@ const getOAuthToken = async () => {
     console.log(`New Token ${response.data.access_token}`);
     return response.data.access_token;
   } catch (error) {
-    console.error('Ошибка при получении токена:', error);
+    console.log('Ошибка при получении токена:', error);
   }
 }
 
@@ -29,7 +29,7 @@ const get42UsersData = async () => {
     });
     return [response.status, response.data];
   } catch (error) {
-    console.error(`Ошибка при запросе v2/cursus/42/users:`, error);
+    console.log(`Ошибка при запросе v2/cursus/42/users:`, error);
   }
 }
 
@@ -51,10 +51,10 @@ const get42UserData = async (name: string, retryAttempt = false) => {
         return get42UserData(name, true);
       }
 
-      console.error(`Ошибка при запросе v2/users/${(name || '').toLowerCase()}:`, error.message);
+      console.log(`Ошибка при запросе v2/users/${(name || '').toLowerCase()}:`, error.message);
       return [status, null];
     }
-    console.error('Неожиданная ошибка:', error);
+    console.log('Неожиданная ошибка:', error);
     return [500, null];
   }
 }

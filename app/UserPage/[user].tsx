@@ -1,4 +1,4 @@
-import { Text, ScrollView, Button, StyleSheet } from "react-native";
+import { Text, ScrollView, Button, StyleSheet, View } from "react-native";
 import { useLocalSearchParams } from 'expo-router';
 import { get42UserData, get42UsersData } from "../utils/requests";
 import { useEffect, useState } from "react";
@@ -32,11 +32,12 @@ const UserPage = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollStyle}>
+      <View style={styles.button}>
       <Button
         title="Get new User"
         onPress={() => (router.push("UserNameInput/"))}
-        style={styles.button}
       />
+      </View>
       {userData !== null && <UserIcon imageUrl={userIconLink} />}
       {userData !== null && <UserProfileCard userData={userData} />}
       {userData === null && <Text>User not found</Text>}
@@ -46,15 +47,14 @@ const UserPage = () => {
 
 const styles = StyleSheet.create({
   button: {
-    width: '80%',
-    paddingBottom: 80,
-    marginBottom: 80,
+    width: '30%',
+    padding: 15,
   },
   scrollStyle: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20
+    paddingVertical: 20,
   }
 });
 

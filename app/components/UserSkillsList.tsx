@@ -4,7 +4,8 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 const SkillLine = ({ item }) => (
   <View style={styles.listItem}>
     <Text style={styles.skillName}>{item.name.replace(/\u0026/g, '&')}</Text>
-    <Text style={styles.skillLevel}>{item.level.toFixed(2)}</Text>
+    <Text style={styles.skillLevel}>{item.level.toFixed(1)}</Text>
+    <Text style={styles.skillLevel}>| {(item.level / 20 * 100).toFixed(0)}%</Text>
   </View>
 );
 
@@ -46,7 +47,8 @@ const styles = StyleSheet.create({
   },
   skillLevel: {
     color: '#666',
-    fontSize: 16
+    fontSize: 16,
+    padding: 3
   }
 });
 
