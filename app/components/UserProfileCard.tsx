@@ -8,7 +8,10 @@ import UserProjectList from './UserProjectList';
 const UserProfileCard = ({ userData }) => {
   const levelData = userData.cursus_users;
   const level = levelData[levelData.length - 1].level;
-  const skills = levelData[levelData.length - 1].skills;
+  const skills1 = levelData[levelData.length - 1].skills;
+  const skills2 = levelData?.[levelData.length - 2]?.skills;
+
+  const skills = skills1.length > 0 ? skills1 : skills2;
   const userProjects = userData.projects_users;
 
   return (
