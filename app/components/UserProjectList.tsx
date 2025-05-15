@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    // alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 8,
     borderBottomWidth: 1,

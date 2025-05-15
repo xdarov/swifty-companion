@@ -6,8 +6,8 @@ import { getOAuthToken } from './utils/requests';
 
 export default () => {
     useEffect(() => {
-      AsyncStorage.setItem('accessToken', '123').then(() => {});
-      // getOAuthToken();
+      // AsyncStorage.setItem('accessToken', '123').then(() => {});
+      getOAuthToken();
   }, []);
   return (
     <UserNameInput />

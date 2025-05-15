@@ -50,6 +50,7 @@ const UserProfileCard = ({ userData }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(255, 255, 255, 0.07)',
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 20,
     margin: 16,
-    // elevation: 3,
   },
   title: {
     fontSize: 20,
